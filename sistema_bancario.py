@@ -1,12 +1,21 @@
-#Criar um sistema bancário simples com depósito, saque e extrato.
-menu = """
+import textwrap
+# Criar um sistema bancário simples com depósito, saque e extrato.
 
-[d] Depositar
-[s] Sacar
-[e] Extrato
-[q] Sair
 
-=> """
+def menu():
+    menu = """\n
+
+    [d] \t Depositar
+    [s] \t Sacar
+    [e] \t Extrato
+    [nc] \t Nova conta
+    [lc] \t Listar contas
+    [nu] \t Novo usuário
+    [q] \t Sair
+
+    => """
+    return input(textwrap.dedent(menu))
+
 
 saldo = 0
 limite_diario = 500
@@ -16,17 +25,13 @@ LIMITE_SAQUES = 3
 
 while True:
        
-    opcao = input(menu)
+    opcao = menu()
 
     if opcao == 'd':
         valor = float(input('Qual o valor do depósito: '))
-    
-        if valor > 0:
-            saldo += valor
-            extrato += f"Depósito: R$ {valor:.2f}\n"
-        else:
-            print('Operação falou. O valor informado é inválido.')
 
+        saldo, extrato = depositar(saldo, valor, extrato)
+    
     elif opcao == 's':
 
         valor = float(input('Qual o valor do saque? '))
@@ -60,3 +65,23 @@ while True:
 
     else:
         print('Operação inválida, por favor, selecione uma opção válida.')
+
+def depositar(saldo, valor, extrato, /):
+    if valor > 0:
+        saldo += valor
+        extrato += f'Depósito: \tR$ {valor:.2f}\n'
+        print('\n=== Depósito realizado com sucesso. ===')
+    else:
+        print('\n @@@ Operação falhou. O valor informado é inválido. @@@')
+    return saldo, extrato
+
+def sacar(*, saldo, valor, exrato, limite, numero_saques, limite_saques):
+
+
+def exibir_extrato(saldo, /, *, extrato):
+
+
+def criar_usuario(usuarios):
+
+
+def filtrar_usuario(cpf, usuarios):
